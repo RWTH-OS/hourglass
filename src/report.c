@@ -18,10 +18,16 @@
 
 #include "report.h"
 
+#include <stdio.h>
+
 int report(struct result result)
 {
+    /*
+     * write results to stdout (or file)
+     * depending on opt
+     */
 
-
+    printf("Dummy result\n");
 
     return 0;
 }

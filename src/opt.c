@@ -22,6 +22,10 @@ int opt(int argc, char *argv[], struct opt *opt)
 {
     opt->dummy = 0;
 
+    /*
+     * read command line arguments and store them in opt
+     */
+
     return 0;
 }
 

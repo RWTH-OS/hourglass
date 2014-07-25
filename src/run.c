@@ -18,11 +18,21 @@
 
 #include "run.h"
 
+static void store_results(void)
+{
+    /*
+     * create histogram or record all timestamps
+     */
+}
+
 int run(struct opt opt, struct result *result)
 {
+    /*
+     * execute hourglass routine
+     */
 
-
-
+    store_results();
 
     return 0;
 }
+

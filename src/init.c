@@ -20,6 +20,10 @@
 
 int init(struct opt opt)
 {
+    /*
+     * initialize (if required)
+     * e.g. read number of processors available or cache parameters
+     */
 
     return 0;
 }
