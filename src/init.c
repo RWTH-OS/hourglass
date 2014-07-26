@@ -19,7 +19,6 @@
 #include "init.h"
 #include "rdtsc.h"
 
-#include <stdio.h>
 
 int init(struct opt *opt)
 {
@@ -31,7 +30,6 @@ int init(struct opt *opt)
     //opt->tps = rdtsc_ticks_per_sec();   // does not work reliably...
     opt->tps = 2600000000; 
 
-    printf("init: tps = %llu\n", (unsigned long long)opt->tps);
 
     return 0;
 }

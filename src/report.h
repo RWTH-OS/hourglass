@@ -22,6 +22,7 @@
 #include "run.h"
 #include "opt.h"
 
+int report_params(const struct opt *opt);
 int report(const struct opt *opt, const struct result *result);
 
 #endif //  __REPORT_H__

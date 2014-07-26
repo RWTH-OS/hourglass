@@ -22,6 +22,19 @@
 #include <stdio.h>
 
 
+int report_params(const struct opt *opt)
+{
+    printf("init: tps = %llu\n", (unsigned long long)opt->tps);
+    printf("secs      : %u\n", opt->secs);
+    printf("threshold : %llu\n", (unsigned long long)opt->threshold);
+    if (opt->mode == hist) {
+        printf("mode      : histogram (cnt: %u, width: %u)\n", opt->hist_cnt, opt->hist_width);
+    } else if (opt->mode == list) {
+        printf("mode      : list (cnt: %u)\n", opt->list_cnt);
+    }
+    return 0;
+}
+
 static int report_stat(const struct result *result)
 {
     printf("   # loops  : %15llu\n",

@@ -35,6 +35,8 @@ int main(int argc, char *argv[])
     opt(argc, argv, &opts);
     init(&opts);
 
+    report_params(&opts);
+
     setup(&opts);
     run(&opts, &results);
     setdown(&opts);
