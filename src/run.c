@@ -76,20 +76,19 @@ static int hourglass(uint64_t duration, uint64_t threshold)
         }
         /* Note: additional workload may be added here */
     }
+    return 0;
 }
 
-int run(struct opt *opt, struct result *result)
+int run(const struct opt *opt, struct result *result)
 {
-    uint64_t t;
-
     results = result;
 
     results->min=UINT64_MAX;
     results->max=0;
     results->sum=0;
     results->cnt=0;
-    results->t_min;
-    results->t_max;
+    results->t_min = 0;
+    results->t_max = 0;
 
     switch (opt->mode) {
         case stat :
@@ -111,7 +110,7 @@ int run(struct opt *opt, struct result *result)
     return 0;
 }
 
-int run_free(struct opt *opt, struct result *result)
+int run_free(const struct opt *opt, struct result *result)
 {
     return 0;
 }

@@ -21,7 +21,7 @@
 #include <stdio.h>
 
 
-static int report_stat(struct result *result)
+static int report_stat(const struct result *result)
 {
     printf("   # loops  : %15llu\n",
             (unsigned long long)result->cnt);
@@ -36,7 +36,7 @@ static int report_stat(struct result *result)
     return 0;
 }
 
-int report(struct opt *opt, struct result *result)
+int report(const struct opt *opt, const struct result *result)
 {
     /*
      * write results to stdout (or file)

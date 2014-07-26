@@ -15,6 +15,8 @@
  *
  * =====================================================================================
  */
+
+#define _SVID_SOURCE
 #include <sys/time.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -24,7 +26,7 @@
 #include "rdtsc.h"
 
 static inline void cpuid(unsigned func, unsigned *eax, unsigned *ebx, unsigned *ecx, unsigned *edx) {
-    asm volatile ("cpuid" : "=a"(*eax), "=b"(*ebx), "=c"(*ecx), "=d"(*edx) : "a"(func));
+    __asm__ volatile ("cpuid" : "=a"(*eax), "=b"(*ebx), "=c"(*ecx), "=d"(*edx) : "a"(func));
 }
 
 static inline uint32_t cpuid_edx(uint32_t code) {
@@ -229,9 +231,9 @@ uint64_t rdtsc_get_overhead(const uint64_t iterations) {
 
     for (c = 0; c < iterations; c++) {
 #if ! __MIC__
-        asm volatile("lfence");
+        __asm__ volatile("lfence");
 #else
-        asm volatile("lock; add $0, 0(%%rsp)" ::: "memory");
+        __asm__ volatile("lock; add $0, 0(%%rsp)" ::: "memory");
 #endif
         rdtsc(&tsc_start);
         rdtsc(&tsc_end);

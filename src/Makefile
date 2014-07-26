@@ -1,6 +1,6 @@
 
-CC=gcc
-CFLAGS=-O2
+CC=color-gcc
+CFLAGS=-O2 -std=c11 -Wall -Wextra -Wno-unused-parameter
 LDFLAGS=
 LIBS=
 
@@ -10,6 +10,8 @@ HFILES=$(shell ls *.h)
 OFILES=$(CFILES:.c=.o)
 
 default : $(PROGRAM)
+
+quick : $(PROGRAM)
 
 $(PROGRAM) : $(OFILES)
 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@ 

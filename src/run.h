@@ -35,8 +35,8 @@ struct result {
 
 };
 
-int run(struct opt *opt, struct result *result);
-int run_free(struct opt *opt, struct result *result);
+int run(const struct opt *opt, struct result *result);
+int run_free(const struct opt *opt, struct result *result);
 
 
 #endif //  __RUN_H__

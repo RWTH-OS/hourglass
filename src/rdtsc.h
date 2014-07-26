@@ -39,7 +39,7 @@ typedef union __attribute__((__transparent_union__))
  */
 static inline void __attribute__((__always_inline__, gnu_inline, optimize(3))) rdtsc(tsc_t tsc)
 {
-    asm volatile ("rdtsc" : "=a"(tsc.__u32->__low), "=d"(tsc.__u32->__high) );
+    __asm__ volatile ("rdtsc" : "=a"(tsc.__u32->__low), "=d"(tsc.__u32->__high) );
 }
 
 /* 
@@ -48,13 +48,13 @@ static inline void __attribute__((__always_inline__, gnu_inline, optimize(3))) r
 static inline void __attribute__((__always_inline__, gnu_inline, optimize(3))) rdtsc_serialized(tsc_t tsc)
 {
 #if ! __MIC__
-    asm volatile (
+    __asm__ volatile (
             "lfence\n\t"    // serialize (needs SSE2, available since AMD Athlon64, Intel Core)
             "rdtsc\n\t"
             "lfence\n\t"
             : "=a"(tsc.__u32->__low), "=d"(tsc.__u32->__high) );
 #else
-    asm volatile (
+    __asm__ volatile (
             "lock; add $0, 0(%%rsp)\n\t"    // serialize 
             "rdtsc\n\t"
             "lock; add $0, 0(%%rsp)\n\t"    // serialize 
