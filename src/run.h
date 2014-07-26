@@ -22,6 +22,10 @@
 #include "opt.h"
 
 #include <stdint.h>
+struct res_list {
+    uint64_t time;
+    uint64_t gap;
+};
 
 struct result {
     uint64_t dummy;
@@ -34,6 +38,7 @@ struct result {
     uint64_t t_max;
 
     uint32_t *hist;
+    struct res_list *list;
 
 };
 

@@ -50,13 +50,18 @@ static void store_results_hist(uint64_t gap, uint64_t offset)
     hist_add(gap);
 }
 
+static unsigned list_cnt;
 static void store_results_list(uint64_t gap, uint64_t offset)
 {
+    static unsigned idx = 0;
     /*
      * store all timestamps
      */
+    if (idx >= list_cnt) return;
     store_results_stat(gap, offset);
-    results->dummy = gap;
+    results->list[idx].time = offset;
+    results->list[idx].gap = gap;
+    idx++;
 }
 
 static void (*store_results)(uint64_t gap, uint64_t offset);
@@ -103,6 +108,8 @@ int run(const struct opt *opt, struct result *result)
             break;
         case list :
             store_results = store_results_list;
+            list_cnt = opt->list_cnt;
+            results->list = calloc(opt->list_cnt, sizeof(struct res_list));
             break;
     }
 
@@ -110,7 +117,7 @@ int run(const struct opt *opt, struct result *result)
      * execute hourglass routine
      */
 
-    hourglass(opt->secs * opt->tps, 0);
+    hourglass(opt->secs * opt->tps, opt->threshold);
     return 0;
 }
 
@@ -119,6 +126,10 @@ int run_free(const struct opt *opt, struct result *result)
     if (results->hist != NULL) {
         free(results->hist);
         results->hist = NULL;
+    }
+    if (results->list != NULL) {
+        free(results->list);
+        results->list = NULL;
     }
     return 0;
 }

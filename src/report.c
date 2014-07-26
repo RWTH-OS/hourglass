@@ -50,6 +50,16 @@ int report(const struct opt *opt, const struct result *result)
 
     if (opt->mode == hist) {
         hist_print();
+    } else if (opt->mode == list) {
+        unsigned i;
+        for (i=0; i<opt->list_cnt; i++) {
+            if (result->list[i].time > 0) {
+                printf("  %15llu : %10llu\n", 
+                        (unsigned long long)result->list[i].time,
+                        (unsigned long long)result->list[i].gap);
+            } else break;
+        }
+
     }
 
     return 0;

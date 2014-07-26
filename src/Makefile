@@ -1,6 +1,6 @@
 
 CC=color-gcc
-CFLAGS=-O2 -std=c11 -Wall -Wextra -Wno-unused-parameter
+CFLAGS=-O2 -std=c11 -Wall -Wextra -Wno-unused-parameter -g
 LDFLAGS=
 LIBS=-lm
 
