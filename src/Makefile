@@ -11,7 +11,7 @@ OFILES=$(CFILES:.c=.o)
 
 default : $(PROGRAM)
 
-$(PROGRAM) : main.o opt.o init.o setup.o run.o report.o rdtsc.o
+$(PROGRAM) : $(OFILES)
 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@ 
 
 .depend : $(CFILES) $(HFILES)
@@ -26,5 +26,4 @@ tags :
 
 clean :
 	-rm -f *.o $(PROGRAM) .depend
-	-rm -f svn.version svn.h svnversion.out
 
