@@ -21,8 +21,10 @@
 
 #include "opt.h"
 
+#include <stdint.h>
+
 struct result {
-    int dummy;
+    uint64_t dummy;
 };
 
 int run(struct opt opt, struct result *result);

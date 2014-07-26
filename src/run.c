@@ -17,21 +17,43 @@
  */
 
 #include "run.h"
+#include "rdtsc.h"
 
-static void store_results(void)
+static struct result *results;
+
+
+static void store_results_hist(uint64_t t)
 {
     /*
-     * create histogram or record all timestamps
+     * create histogram 
      */
+    results->dummy = t;
 }
+
+static void store_results_list(uint64_t t)
+{
+    /*
+     * store all timestamps
+     */
+    results->dummy = t;
+}
+
+static void (*store_results)(uint64_t t);
 
 int run(struct opt opt, struct result *result)
 {
+    uint64_t t;
+
+    results = result;
+    store_results = store_results_hist;
+
     /*
      * execute hourglass routine
      */
 
-    store_results();
+    rdtsc(&t);
+
+    store_results(t);
 
     return 0;
 }

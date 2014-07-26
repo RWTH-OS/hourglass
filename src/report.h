@@ -20,7 +20,8 @@
 #define __REPORT_H__
 
 #include "run.h"
+#include "opt.h"
 
-int report(struct result result);
+int report(struct opt opt, struct result result);
 
 #endif //  __REPORT_H__

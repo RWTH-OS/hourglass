@@ -20,14 +20,14 @@
 
 #include <stdio.h>
 
-int report(struct result result)
+int report(struct opt opt, struct result result)
 {
     /*
      * write results to stdout (or file)
      * depending on opt
      */
 
-    printf("Dummy result\n");
+    printf("Dummy result: %llu \n", (unsigned long long)result.dummy);
 
     return 0;
 }

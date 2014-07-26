@@ -20,7 +20,7 @@
 #define  __OPT_H__
 
 struct opt {
-    int dummy;
+    unsigned secs;
 };
 
 int opt(int argc, char *argv[], struct opt *opt);

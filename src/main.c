@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     run(opts, &results);
     setdown(opts);
 
-    report(results);
+    report(opts, results);
 
     return EXIT_SUCCESS;
 }
