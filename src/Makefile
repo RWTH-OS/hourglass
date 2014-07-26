@@ -2,7 +2,7 @@
 CC=color-gcc
 CFLAGS=-O2 -std=c11 -Wall -Wextra -Wno-unused-parameter
 LDFLAGS=
-LIBS=
+LIBS=-lm
 
 PROGRAM=hg
 CFILES=$(shell ls *.c)

@@ -18,9 +18,10 @@
 
 #include "run.h"
 #include "rdtsc.h"
+#include "hist.h"
 
 #include <limits.h>
-#include <stdio.h>
+#include <stdlib.h>
 
 static struct result *results;
 
@@ -46,7 +47,7 @@ static void store_results_hist(uint64_t gap, uint64_t offset)
      * create histogram 
      */
     store_results_stat(gap, offset);
-    results->dummy = gap;
+    hist_add(gap);
 }
 
 static void store_results_list(uint64_t gap, uint64_t offset)
@@ -54,6 +55,7 @@ static void store_results_list(uint64_t gap, uint64_t offset)
     /*
      * store all timestamps
      */
+    store_results_stat(gap, offset);
     results->dummy = gap;
 }
 
@@ -89,6 +91,7 @@ int run(const struct opt *opt, struct result *result)
     results->cnt=0;
     results->t_min = 0;
     results->t_max = 0;
+    results->hist = NULL;
 
     switch (opt->mode) {
         case stat :
@@ -96,6 +99,7 @@ int run(const struct opt *opt, struct result *result)
             break;
         case hist :
             store_results = store_results_hist;
+            results->hist = hist_alloc(opt);
             break;
         case list :
             store_results = store_results_list;
@@ -112,5 +116,9 @@ int run(const struct opt *opt, struct result *result)
 
 int run_free(const struct opt *opt, struct result *result)
 {
+    if (results->hist != NULL) {
+        free(results->hist);
+        results->hist = NULL;
+    }
     return 0;
 }

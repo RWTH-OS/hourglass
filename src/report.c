@@ -17,6 +17,7 @@
  */
 
 #include "report.h"
+#include "hist.h"
 
 #include <stdio.h>
 
@@ -46,6 +47,10 @@ int report(const struct opt *opt, const struct result *result)
     printf("Dummy result: %llu \n", (unsigned long long)result->dummy);
 
     report_stat(result);
+
+    if (opt->mode == hist) {
+        hist_print();
+    }
 
     return 0;
 }

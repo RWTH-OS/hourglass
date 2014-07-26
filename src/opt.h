@@ -25,6 +25,9 @@ struct opt {
     unsigned secs;
     enum {stat, hist, list} mode;
     uint64_t tps;
+
+    unsigned hist_cnt;
+    unsigned hist_width;
 };
 
 int opt(int argc, char *argv[], struct opt *opt);

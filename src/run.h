@@ -33,6 +33,8 @@ struct result {
     uint64_t t_min;
     uint64_t t_max;
 
+    uint32_t *hist;
+
 };
 
 int run(const struct opt *opt, struct result *result);

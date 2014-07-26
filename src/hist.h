@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  opt.c
+ *       Filename:  hist.h
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  25.07.2014 15:01:32
+ *        Created:  26.07.2014 20:02:48
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -16,21 +16,15 @@
  * =====================================================================================
  */
 
+#ifndef __HIST_H__
+#define __HIST_H__
+
 #include "opt.h"
 
-int opt(int argc, char *argv[], struct opt *opt)
-{
-    opt->secs = 4;
-    opt->mode = stat;
+#include <stdint.h>
 
-    opt->mode = hist;
-    opt->hist_cnt = 100;
-    opt->hist_width = 50;
+uint32_t *hist_alloc(const struct opt *opt);
+void hist_add(uint64_t t);
+int hist_print(void);
 
-    /*
-     * read command line arguments and store them in opt
-     */
-
-    return 0;
-}
-
+#endif // __HIST_H__
