@@ -25,9 +25,18 @@
 
 struct result {
     uint64_t dummy;
+
+    uint64_t min;
+    uint64_t max;
+    uint64_t sum;
+    uint64_t cnt;
+    uint64_t t_min;
+    uint64_t t_max;
+
 };
 
-int run(struct opt opt, struct result *result);
+int run(struct opt *opt, struct result *result);
+int run_free(struct opt *opt, struct result *result);
 
 
 #endif //  __RUN_H__

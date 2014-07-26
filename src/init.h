@@ -21,6 +21,7 @@
 
 #include "opt.h"
 
-int init(struct opt opt);
+int init(struct opt *opt);
+int deinit(struct opt *opt);
 
 #endif //  __INIT_H__

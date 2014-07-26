@@ -22,6 +22,6 @@
 #include "run.h"
 #include "opt.h"
 
-int report(struct opt opt, struct result result);
+int report(struct opt *opt, struct result *result);
 
 #endif //  __REPORT_H__

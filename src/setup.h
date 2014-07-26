@@ -21,7 +21,7 @@
 
 #include "opt.h"
 
-int setup(struct opt opt);
-int setdown(struct opt opt);
+int setup(struct opt *opt);
+int setdown(struct opt *opt);
 
 #endif //  __SETUP_H__

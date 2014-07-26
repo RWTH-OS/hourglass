@@ -21,6 +21,7 @@
 int opt(int argc, char *argv[], struct opt *opt)
 {
     opt->secs = 4;
+    opt->mode = stat;
 
     /*
      * read command line arguments and store them in opt

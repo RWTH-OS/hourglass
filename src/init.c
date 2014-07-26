@@ -17,12 +17,31 @@
  */
 
 #include "init.h"
+#include "rdtsc.h"
 
-int init(struct opt opt)
+#include <stdio.h>
+
+int init(struct opt *opt)
 {
     /*
      * initialize (if required)
      * e.g. read number of processors available or cache parameters
+     */
+
+    opt->tps = rdtsc_ticks_per_sec();
+
+    printf("init: tps = %llu\n", (unsigned long long)opt->tps);
+
+    return 0;
+}
+
+
+
+int deinit(struct opt *opt)
+{
+    /*
+     * de-initialize (if required)
+     * e.g. free allocated resources
      */
 
     return 0;

@@ -25,21 +25,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct opt opts;
-struct result results;
+struct opt opts = {0};
+struct result results = {0};
 
 int main(int argc, char *argv[])
 {
     printf("hourglass\n");
 
     opt(argc, argv, &opts);
-    init(opts);
+    init(&opts);
 
-    setup(opts);
-    run(opts, &results);
-    setdown(opts);
+    setup(&opts);
+    run(&opts, &results);
+    setdown(&opts);
 
-    report(opts, results);
+    report(&opts, &results);
+
+    run_free(&opts, &results);
+
+    deinit(&opts);
 
     return EXIT_SUCCESS;
 }

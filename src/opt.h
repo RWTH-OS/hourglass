@@ -19,8 +19,12 @@
 #ifndef __OPT_H__
 #define  __OPT_H__
 
+#include <stdint.h>
+
 struct opt {
     unsigned secs;
+    enum {stat, hist, list} mode;
+    uint64_t tps;
 };
 
 int opt(int argc, char *argv[], struct opt *opt);

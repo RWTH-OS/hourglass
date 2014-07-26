@@ -19,7 +19,7 @@
 #include "setup.h"
 
 
-int setup(struct opt opt)
+int setup(struct opt *opt)
 {
     /*
      * set up run-time environment for benchmark
@@ -31,7 +31,7 @@ int setup(struct opt opt)
     return 0;
 }
 
-int setdown(struct opt opt)
+int setdown(struct opt *opt)
 {
     /*
      * undo things from setup()
