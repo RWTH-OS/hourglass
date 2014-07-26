@@ -24,6 +24,7 @@
 #include <stdint.h>
 
 uint32_t *hist_alloc(const struct opt *opt);
+int hist_reset(void);
 void hist_add(uint64_t t);
 int hist_print(void);
 

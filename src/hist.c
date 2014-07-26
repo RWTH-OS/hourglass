@@ -30,7 +30,17 @@ uint32_t *hist_alloc(const struct opt *opt)
 {
     opts = opt;
     hists = calloc(opt->hist_cnt, sizeof(uint32_t)); 
+    hist_reset();
     return hists;
+}
+
+int hist_reset(void)
+{
+    unsigned i;
+    for (i=0; i<opts->hist_cnt; i++) {
+        hists[i] = 0;
+    }
+    return 0;
 }
 
 void hist_add(uint64_t t)
@@ -51,6 +61,7 @@ int hist_print(void)
         if (hists[i] > max) max = hists[i];
     }
     max = (unsigned)log10((double)max);
+    if (max == 0) max = 1;
     memset(bar, '*', bar_width);
     bar[bar_width] = 0;
 

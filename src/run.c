@@ -24,6 +24,7 @@
 #include <stdlib.h>
 
 static struct result *results;
+static const struct opt *opts;
 
 
 static void store_results_stat(uint64_t gap, uint64_t offset)
@@ -51,25 +52,48 @@ static void store_results_hist(uint64_t gap, uint64_t offset)
 }
 
 static unsigned list_cnt;
+static unsigned list_idx = 0;
 static void store_results_list(uint64_t gap, uint64_t offset)
 {
-    static unsigned idx = 0;
     /*
      * store all timestamps
      */
-    if (idx >= list_cnt) return;
+    if (list_idx >= list_cnt) return;
     store_results_stat(gap, offset);
-    results->list[idx].time = offset;
-    results->list[idx].gap = gap;
-    idx++;
+    results->list[list_idx].time = offset;
+    results->list[list_idx].gap = gap;
+    list_idx++;
 }
 
 static void (*store_results)(uint64_t gap, uint64_t offset);
 
 
+static int reset_results(void)
+{
+    results->min=UINT64_MAX;
+    results->max=0;
+    results->sum=0;
+    results->cnt=0;
+    results->t_min = 0;
+    results->t_max = 0;
+    if (opts->mode == hist) {
+        hist_reset();
+    } else if (opts->mode == list) {
+        unsigned i;
+        for (i=0; i<opts->list_cnt; i++) {
+            results->list[i].time=0;
+            results->list[i].gap=0;
+        }
+        list_idx = 0;
+    }
+    return 0;
+}
+
 static int hourglass(uint64_t duration, uint64_t threshold)
 {
     uint64_t t1, t2, t_end, diff;             /* timestamps */
+
+    reset_results();
 
     rdtsc(&t1);                               /* start-time */
     t_end = t1 + duration;            /* calculate end-time */
@@ -88,14 +112,10 @@ static int hourglass(uint64_t duration, uint64_t threshold)
 
 int run(const struct opt *opt, struct result *result)
 {
+    unsigned i;
     results = result;
+    opts = opt;
 
-    results->min=UINT64_MAX;
-    results->max=0;
-    results->sum=0;
-    results->cnt=0;
-    results->t_min = 0;
-    results->t_max = 0;
     results->hist = NULL;
 
     switch (opt->mode) {
@@ -105,17 +125,23 @@ int run(const struct opt *opt, struct result *result)
         case hist :
             store_results = store_results_hist;
             results->hist = hist_alloc(opt);
+            hist_reset();
             break;
         case list :
             store_results = store_results_list;
             list_cnt = opt->list_cnt;
             results->list = calloc(opt->list_cnt, sizeof(struct res_list));
+            for (i=0; i<opt->list_cnt; i++) {
+                results->list[i].time=0;
+                results->list[i].gap=0;
+            }
             break;
     }
 
     /*
      * execute hourglass routine
      */
+    hourglass(1 * opt->tps, opt->threshold); // 1 sec warmup
 
     hourglass(opt->secs * opt->tps, opt->threshold);
     return 0;

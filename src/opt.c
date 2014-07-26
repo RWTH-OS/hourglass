@@ -28,9 +28,11 @@ int opt(int argc, char *argv[], struct opt *opt)
     opt->hist_cnt = 100;
     opt->hist_width = 50;
 
+    ///*
     opt->mode = list;
-    opt->threshold = 100;
+    opt->threshold = 150;
     opt->list_cnt = 1000;
+    //*/
 
     /*
      * read command line arguments and store them in opt

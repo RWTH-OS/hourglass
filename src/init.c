@@ -28,7 +28,8 @@ int init(struct opt *opt)
      * e.g. read number of processors available or cache parameters
      */
 
-    opt->tps = rdtsc_ticks_per_sec();
+    //opt->tps = rdtsc_ticks_per_sec();   // does not work reliably...
+    opt->tps = 2600000000; 
 
     printf("init: tps = %llu\n", (unsigned long long)opt->tps);
 
