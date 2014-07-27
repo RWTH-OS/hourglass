@@ -19,3 +19,7 @@ not implemented in the setup. For all CPUs, issue (as root):
 
 (Undo with *ondemand* or whatever was in these files before.)
 
+Contact
+=======
+Georg Wassen <georg.wassen@gmail.com>
+
