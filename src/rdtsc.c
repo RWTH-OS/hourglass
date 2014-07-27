@@ -17,8 +17,10 @@
  */
 
 #define _SVID_SOURCE
+#define _XOPEN_SOURCE 500
 #include <sys/time.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -39,6 +41,7 @@ static inline uint32_t cpuid_edx(uint32_t code) {
 
 static uint64_t tps = 0;
 
+#if 0
 /* 
  * ===  FUNCTION  ======================================================================
  *         Name:  second()
@@ -103,6 +106,45 @@ uint64_t rdtsc_ticks_per_sec(void)
      
     tps = (uint64_t)slope;
     return tps;
+}
+#endif
+uint64_t rdtsc_ticks_per_sec(void)
+{
+    uint64_t t1, t2, t3, t4;
+    struct timeval tv1, tv2;
+
+    uint64_t diff_tsc, diff_usec;
+
+    rdtsc(&t1);
+    gettimeofday(&tv1, 0);
+    rdtsc(&t2);
+
+    usleep(500000);  // 0.5 sec
+
+    rdtsc(&t3);
+    gettimeofday(&tv2, 0);
+    rdtsc(&t4);
+
+    printf("t2-t1 : %llu\n", (unsigned long long)t2-t1);
+    printf("t4-t3 : %llu\n", (unsigned long long)t4-t3);
+
+    t1 = (t1+t2)/2;
+    t2 = (t3+t4)/2;
+
+    diff_tsc = t2-t1;
+
+    printf("diff tsc: %llu\n", (unsigned long long)diff_tsc);
+
+    diff_usec = (tv2.tv_sec - tv1.tv_sec) * 1000000;
+    if (tv2.tv_usec > tv1.tv_usec)
+        diff_usec += tv2.tv_usec - tv1.tv_usec;
+    else
+        diff_usec += tv1.tv_usec - tv2.tv_usec;
+
+    printf("diff usec: %llu\n", 
+            (unsigned long long)diff_usec); 
+
+    return (diff_tsc*1000000) / diff_usec;
 }
 
 /* 
