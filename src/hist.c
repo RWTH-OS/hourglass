@@ -60,7 +60,7 @@ int hist_print(void)
     for (i=0; i<opts->hist_cnt; i++) {
         if (hists[i] > max) max = hists[i];
     }
-    max = (unsigned)log10((double)max);
+    max = (unsigned)ceil(log10((double)max));
     if (max == 0) max = 1;
     memset(bar, '*', bar_width);
     bar[bar_width] = 0;
@@ -68,10 +68,10 @@ int hist_print(void)
     printf("Histogram (%u bins with %u ticks each)\n", opts->hist_cnt, opts->hist_width);
     for (i=0; i<opts->hist_cnt; i++) {
         printf("     %5u : %5u..%5u : %-10u  %s\n", i,
-                (unsigned)i*opts->hist_width,
-                (unsigned)(i+1)*opts->hist_width-1,
-                (unsigned)hists[i],
-                bar+(unsigned)(bar_width-((log10(hists[i]+1.)*bar_width)/max)));
+                (unsigned)(i*opts->hist_width),
+                (unsigned)((i+1)*opts->hist_width-1),
+                (unsigned)(hists[i]),
+                (char*)bar+(unsigned)(bar_width-((log10(hists[i]+1.)*bar_width)/max)));
     }
     return 0;
 }
