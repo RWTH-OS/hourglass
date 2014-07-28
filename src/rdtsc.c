@@ -125,15 +125,15 @@ uint64_t rdtsc_ticks_per_sec(void)
     gettimeofday(&tv2, 0);
     rdtsc(&t4);
 
-    printf("t2-t1 : %llu\n", (unsigned long long)t2-t1);
-    printf("t4-t3 : %llu\n", (unsigned long long)t4-t3);
+    //printf("t2-t1 : %llu\n", (unsigned long long)t2-t1);
+    //printf("t4-t3 : %llu\n", (unsigned long long)t4-t3);
 
     t1 = (t1+t2)/2;
     t2 = (t3+t4)/2;
 
     diff_tsc = t2-t1;
 
-    printf("diff tsc: %llu\n", (unsigned long long)diff_tsc);
+    //printf("diff tsc: %llu\n", (unsigned long long)diff_tsc);
 
     diff_usec = (tv2.tv_sec - tv1.tv_sec) * 1000000;
     if (tv2.tv_usec > tv1.tv_usec)
@@ -141,8 +141,8 @@ uint64_t rdtsc_ticks_per_sec(void)
     else
         diff_usec += tv1.tv_usec - tv2.tv_usec;
 
-    printf("diff usec: %llu\n", 
-            (unsigned long long)diff_usec); 
+    //printf("diff usec: %llu\n", 
+    //        (unsigned long long)diff_usec); 
 
     return (diff_tsc*1000000) / diff_usec;
 }
