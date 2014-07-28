@@ -1,0 +1,13 @@
+hourglass
+t2-t1 : 3792
+t4-t3 : 2064
+diff tsc: 1336033400
+diff usec: 500066
+init: tps = 2671714133
+secs      : 60
+threshold : 0
+Dummy result: 0 
+   # loops  :      1714381341
+   Min.     :              72     (@loop #5)
+   Avg.     :              93.50
+   Max.     :         2303304     (@loop #46156965)
