@@ -46,13 +46,14 @@ int opt(int argc, char *argv[], struct opt *opt)
     while ((c = getopt(argc, argv, "b:c:d:hr:t:")) != -1) {
         switch (c) {
             case 'h' :
-                printf("usage: %s <options>", basename(argv[0]));
+                printf("usage: %s <options>\n", basename(argv[0]));
                 printf("   -h       help  \n");
                 printf("   -d N     duration (in sec or 1m, 1h)  \n");
                 printf("   -r R     report: hist, list\n");
                 printf("   -c N     count (hist or list)\n");
                 printf("   -b N     hist bin width (in ticks)\n");
                 printf("   -t N     threshold (in ticks)\n");
+                exit(1);
                 break;
             case 'd' :
                 opt->secs = (unsigned)strtoul(optarg, &p, 0);
