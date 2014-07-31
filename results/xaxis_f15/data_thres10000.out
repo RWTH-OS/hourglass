@@ -1,0 +1,11 @@
+hourglass
+init: tps = 889192200
+secs      : 60
+threshold : 10000
+mode      : list (cnt: 1000)
+Dummy result: 0 
+   # loops  :               1
+   Min.     :           13732     (@loop #0)
+   Avg.     :           13732.00
+   Max.     :           13732     (@loop #0)
+    5791639075008 :      13732
