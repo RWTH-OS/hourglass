@@ -1,7 +1,7 @@
 
 #CC=color-gcc
 CC=gcc
-CFLAGS=-O2  -Wall -Wextra -Wno-unused-parameter -g
+CFLAGS=  #-O2  -Wall -Wextra -Wno-unused-parameter -g
 LDFLAGS=
 LIBS=-lm
 
