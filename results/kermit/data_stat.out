@@ -1,0 +1,9 @@
+hourglass
+init: tps = 766854063
+secs      : 900
+threshold : 0
+Dummy result: 0 
+   # loops  :     30997237226
+   Min.     :              18     (@loop #0)
+   Avg.     :              22.27
+   Max.     :           43147     (@loop #24254780893)
